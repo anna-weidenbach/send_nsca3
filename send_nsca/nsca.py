@@ -90,11 +90,13 @@ class XORCrypter(Crypter):
     def encrypt(self, value):
         value_s = six.iterbytes(value)
         repeated_iv = six.iterbytes(list(int(math.ceil(float(len(value)) / len(self.iv))) * self.iv))
-        repeated_password = six.iterbytes(list(int(math.ceil(float(len(value)) / len(self.password))) * self.password))
-        xor1 = [a ^ b for a, b in zip(value_s, repeated_iv)]
-        xor2 = [a ^ b for a, b in zip(xor1, repeated_password)]
+        if len(self.password) == 0:
+            xor2 = [a ^ b for a, b in zip(value_s, repeated_iv)]
+        else:
+            repeated_password = six.iterbytes(list(int(math.ceil(float(len(value)) / len(self.password))) * self.password))
+            xor1 = [a ^ b for a, b in zip(value_s, repeated_iv)]
+            xor2 = [a ^ b for a, b in zip(xor1, repeated_password)]
         return b''.join(map(six.int2byte, xor2))
-
 
 class CryptoCrypter(Crypter):
     crypt_id = -1
