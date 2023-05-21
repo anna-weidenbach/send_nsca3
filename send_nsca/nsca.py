@@ -31,13 +31,6 @@ import random
 import socket
 import struct
 
-import Crypto.Cipher.AES
-import Crypto.Cipher.ARC2
-import Crypto.Cipher.Blowfish
-import Crypto.Cipher.DES
-import Crypto.Cipher.DES3
-import Crypto.Cipher.CAST
-import Crypto.Util.randpool
 import six
 
 from . import nagios
