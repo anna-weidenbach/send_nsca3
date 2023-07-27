@@ -4,9 +4,6 @@ import logging
 import optparse
 import sys
 
-import send_nsca
-import send_nsca.nsca
-
 def main():
     parser = optparse.OptionParser(usage="%prog -H <host_address> [args]")
     parser.add_option("-H", "--host-address", default=None, dest="host_address", help="The IP address or hostname of the machine running NSCA")
@@ -24,7 +21,7 @@ def main():
     if args:
         parser.error("This program takes no un-flagged command-line options")
     if opts.version:
-        print "py_send_nsca %s " %send_nsca.version
+        print("py_send_nsca %s " %send_nsca.version)
         return 0
     if not opts.host_address:
         parser.error("-H is required")
